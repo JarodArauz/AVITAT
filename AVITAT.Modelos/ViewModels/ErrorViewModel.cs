@@ -1,4 +1,4 @@
-namespace AVITAT.Models
+namespace AVITAT.Modelos.ViewModels
 {
     public class ErrorViewModel
     {

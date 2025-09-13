@@ -1,9 +1,10 @@
 using System.Diagnostics;
-using AVITAT.Models;
+using AVITAT.Modelos.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AVITAT.Controllers
+namespace AVITAT.Areas.Inventario.Controllers
 {
+    [Area("Inventario")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
