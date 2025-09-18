@@ -2,7 +2,9 @@ using AVITAT.AccesoDatos.Data;
 using AVITAT.AccesoDatos.Repositorio;
 using AVITAT.AccesoDatos.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 

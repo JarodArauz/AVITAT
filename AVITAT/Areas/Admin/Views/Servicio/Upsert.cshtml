@@ -1,0 +1,118 @@
+﻿@model AVITAT.Modelos.Servicio
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var titulo = "Crear Servicio";
+}
+
+ <form method="post">
+    <div style="padding-left:15%; padding-right:15%; padding-bottom:inherit.4rem;">
+
+        <div class="row border-0">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+
+        @if (Model.Id != 0)
+        {
+            //Actualizar
+            titulo = "Actualizar Servicio";
+            <input type="hidden" asp-for="Id" id="id" />
+        }
+
+        <div class="col border-bottom p-0">
+            <h2 class="text-primary">@titulo</h2>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Nombre del Local</label>
+                <input type="text" asp-for="NombreLocal" class="form-control" placeholder="Nombre del local" id="nombre" />
+                <span asp-validation-for="NombreLocal" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Tipo</label>
+                <select asp-for="Tipo" class="form-select">
+                    <option hidden select> Selecciona una opcion </option>
+                    <option>Comida</option>
+                    <option>Hospedaje</option>
+                    <option>Transporte</option>
+                </select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Precio</label>
+                <input type="number" asp-for="Precio" class="form-control" placeholder="Precio del Servicio" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Horario de Atencion</label>
+                <select asp-for="HorarioAtencion" class="form-select">
+                    <option hidden select> Selecciona una opcion </option>
+                    <option>07:00am a 05:00pm</option>
+                    <option>07:00am a 11:00am</option>
+                    <option>11:00am a 02:00pm</option>
+                    <option>06:00pm a 09:00pm</option>                
+                    <option>24 hrs</option>                
+                </select>          
+                <span asp-validation-for="HorarioAtencion" class="text-danger"></span>
+            </div>
+        </div>
+
+        <br/>
+
+        <div>
+            @if(Model.Id != 0)
+            {
+                <partial name="_BotonesActualizarYRegresar" model="Model.Id" />
+            }
+            else
+            {
+                <partial name="_BotonesCrearYRegresar"/>
+            }
+        </div>
+
+    </div>
+
+</form>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        document.getElementById("nombre").addEventListener('change',function(){
+        
+            validarNombre();
+
+        });
+
+        function validarNombre()
+        {
+            var url = '@Url.Content("~/")' + "Admin/Servicio/ValidarNombre";
+            var id = '#id';
+            var nombre = '#nombre';
+
+            $.getJSON(url, {id: $(id).val(), nombre: $(nombre).val()},function(data){
+                $.each(data, function(key, value) {
+                    if(value) {
+                        var nombre = document.getElementById("nombre");
+                        swal("Error", "Nombre ya existe","error");
+                        nombre.value="";
+                    }
+                });
+            })
+        }
+    </script>
+
+}
+ 

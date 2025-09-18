@@ -9,6 +9,7 @@ namespace AVITAT.AccesoDatos.Repositorio.IRepositorio
     public interface IUnidadTrabajo : IDisposable
     {
         IReservaNaturalRepositorio ReservaNatural {  get; }
+        IServicioRepositorio Servicio {  get; }
 
         Task Guardar();
     }

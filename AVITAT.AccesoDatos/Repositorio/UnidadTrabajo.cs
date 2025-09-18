@@ -12,10 +12,12 @@ namespace AVITAT.AccesoDatos.Repositorio
     {
         private readonly ApplicationDbContext _db;
         public IReservaNaturalRepositorio ReservaNatural {  get; private set; }
+        public IServicioRepositorio Servicio {  get; private set; }
         public UnidadTrabajo(ApplicationDbContext db)
         {
                 _db = db;
             ReservaNatural = new ReservaNaturalRepositorio(_db);
+            Servicio = new ServicioRepositorio(_db);
         }
 
         public void Dispose()
