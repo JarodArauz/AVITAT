@@ -10,6 +10,7 @@ namespace AVITAT.AccesoDatos.Repositorio.IRepositorio
     {
         IReservaNaturalRepositorio ReservaNatural {  get; }
         IServicioRepositorio Servicio {  get; }
+        IAveRepositorio Ave {  get; }
 
         Task Guardar();
     }

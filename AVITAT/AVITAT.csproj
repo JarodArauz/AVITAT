@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-AVITAT-a0cbf9cb-12fa-431d-b4c5-732f00565d3e</UserSecretsId>
   </PropertyGroup>

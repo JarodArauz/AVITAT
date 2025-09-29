@@ -14,6 +14,7 @@ namespace AVITAT.AccesoDatos.Data
 
         public DbSet<ReservaNatural> ReservasNaturales { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
+        public DbSet<Ave> Aves { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

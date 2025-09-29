@@ -1,0 +1,111 @@
+﻿@model AVITAT.Modelos.Ave
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var titulo = "Crear Ave";
+}
+
+ <form method="post">
+    <div style="padding-left:15%; padding-right:15%; padding-bottom:inherit.4rem;">
+
+        <div class="row border-0">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+
+        @if (Model.Id != 0)
+        {
+            //Actualizar
+            titulo = "Actualizar Ave";
+            <input type="hidden" asp-for="Id" id="id" />
+        }
+
+        <div class="col border-bottom p-0">
+            <h2 class="text-primary">@titulo</h2>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Nombre</label>
+                <input type="text" asp-for="NombreComun" class="form-control" placeholder="Nombre de la Ave" id="nombre" />
+                <span asp-validation-for="NombreComun" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Nombre Cientifico</label>
+                <input type="text" asp-for="NombreCientifico" class="form-control" placeholder="Nombre Cientifico de la Ave" />
+                <span asp-validation-for="NombreCientifico" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Tipo</label>
+                <select asp-for="Tipo" class="form-select">
+                    <option hidden select> Selecciona una opcion </option>
+                    <option>Endemicas</option>
+                    <option>Nativas</option>
+                    <option>Introducidas</option>
+                </select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Descripcion</label>
+                <input type="text" asp-for="Descripcion" class="form-control" placeholder="Descripcion de la Ave" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+        </div>
+
+        <br/>
+
+        <div>
+            @if(Model.Id != 0)
+            {
+                <partial name="_BotonesActualizarYRegresar" model="Model.Id" />
+            }
+            else
+            {
+                <partial name="_BotonesCrearYRegresar"/>
+            }
+        </div>
+
+    </div>
+
+</form>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        document.getElementById("nombre").addEventListener('change',function(){
+        
+            validarNombre();
+
+        });
+
+        function validarNombre()
+        {
+            var url = '@Url.Content("~/")' + "Admin/Ave/ValidarNombre";
+            var id = '#id';
+            var nombre = '#nombre';
+
+            $.getJSON(url, {id: $(id).val(), nombre: $(nombre).val()},function(data){
+                $.each(data, function(key, value) {
+                    if(value) {
+                        var nombre = document.getElementById("nombre");
+                        swal("Error", "Nombre ya existe","error");
+                        nombre.value="";
+                    }
+                });
+            })
+        }
+    </script>
+
+}
+ 
