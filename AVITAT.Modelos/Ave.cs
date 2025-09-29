@@ -28,6 +28,8 @@ namespace AVITAT.Modelos
         [Required(ErrorMessage = "Descripcion es requerido")]
         public string Descripcion { get; set; }
 
+        public string ImagenUrl { get; set; }
+
 
     }
 }

@@ -18,6 +18,8 @@ namespace AVITAT.AccesoDatos.Configuracion
             builder.Property(x => x.NombreCientifico).IsRequired();
             builder.Property(x => x.Tipo).IsRequired();
             builder.Property(x => x.Descripcion).IsRequired();
+            builder.Property(x => x.ImagenUrl).IsRequired(false);
+
         }
     }
 }

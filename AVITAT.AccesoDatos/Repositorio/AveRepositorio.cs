@@ -22,10 +22,14 @@ namespace AVITAT.AccesoDatos.Repositorio
             var aveBD = _db.Aves.FirstOrDefault(b => b.Id == ave.Id);
             if(aveBD != null)
             {
+                if (ave.ImagenUrl != null)
+                {
+                    aveBD.ImagenUrl = ave.ImagenUrl;
+                }
                 aveBD.NombreComun = ave.NombreComun;
                 aveBD.NombreCientifico = ave.NombreCientifico;
                 aveBD.Tipo = ave.Tipo;
-                aveBD.Descripcion = ave.Descripcion;   
+                aveBD.Descripcion = ave.Descripcion;                  
                 _db.SaveChanges();
             }
         }

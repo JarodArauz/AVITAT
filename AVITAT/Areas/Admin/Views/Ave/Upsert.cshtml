@@ -1,12 +1,14 @@
 ﻿@model AVITAT.Modelos.Ave
+@using AVITAT.Utilidades
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var titulo = "Crear Ave";
 }
 
- <form method="post">
-    <div style="padding-left:15%; padding-right:15%; padding-bottom:inherit.4rem;">
+ <form method="post" enctype="multipart/form-data">
+   <div class="row">
+    <div class="col-8">
 
         <div class="row border-0">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -17,6 +19,7 @@
             //Actualizar
             titulo = "Actualizar Ave";
             <input type="hidden" asp-for="Id" id="id" />
+            <input asp-for="ImagenUrl" hidden />
         }
 
         <div class="col border-bottom p-0">
@@ -60,6 +63,14 @@
             </div>
         </div>
 
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Imagen</label>
+                <input type = "file" accept="image/png, image/gif, image/jpeg" name="files" id="imagenId" class="form-control"/>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+        </div>
+
         <br/>
 
         <div>
@@ -69,11 +80,22 @@
             }
             else
             {
-                <partial name="_BotonesCrearYRegresar"/>
+                    <button type="submit" onclick="return validarImagen()" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Crear</button>
+                    <a asp-action="Index" class="btn btn-success"><i class="bi bi-arrow-return-left"></i> Regresar</a>
+                
             }
         </div>
 
     </div>
+    <div class="col-4">
+
+            @if (Model.Id != 0)
+            {
+                <img src="@DS.ImagenRuta@Model.ImagenUrl" width="100%" style="border-radius:5px; border:1px solid #bbb" />
+            }
+
+    </div>
+  </div>
 
 </form>
 
@@ -105,6 +127,16 @@
                 });
             })
         }
+
+        function validarImagen(){
+            if(document.getElementById("imagenId").value=="")
+            {
+                swal("Error","Seleccion una Imagen!","error")
+                return false;
+            }
+            return true;
+        }
+
     </script>
 
 }
